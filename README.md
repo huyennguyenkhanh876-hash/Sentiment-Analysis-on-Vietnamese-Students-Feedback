@@ -18,7 +18,7 @@ To tackle the linguistic characteristics of Vietnamese student feedback and the 
 4. **Class-Weighted Loss:** Addressed the severe data imbalance by applying `compute_class_weight('balanced')` from `scikit-learn`. This heavily penalizes the model for misclassifying minority classes like *Neutral* and *Others*.
 5. **Vietnamese NLP Preprocessing:** Utilized `pyvi` (`ViTokenizer`) for accurate Vietnamese word segmentation and mapped raw emoticons (e.g., `:)`, `<3`) into text formats to preserve high-value sentiment signals.
 
-## 🎯 Performance on Test Set
+## Performance on Test Set
 The model's performance is measured using Precision, Recall, and Macro F1-score.
 * **Sentiment Analysis:** Achieved a **Macro F1-score of 74.80%**.
 * **Topic Classification:** Achieved a **Macro F1-score of 73.80%**.
@@ -26,14 +26,12 @@ The model's performance is measured using Precision, Recall, and Macro F1-score.
 **Minority Class Breakthrough:** 
 Despite the overall F1-score being lower than the MaxEnt baseline, the proposed techniques yielded impressive results on the most difficult minority classes. The *Facility* class (only 3.48% of the data) achieved an outstanding **88.03% F1-score**. The *Neutral* sentiment class reached a **41.62% F1-score**, which is a +7.63% improvement compared to the original MaxEnt baseline (33.99%).
 
-## 📉 Error Analysis & Limitations
+## Error Analysis & Limitations
 * **The "Others" and "Neutral" Bottleneck:** The primary reason the overall Macro F1 trails the baseline (87.94% for Sentiment, 84.03% for Topic) is the poor performance on the *Neutral* and *Others* classes. The *Others* class acts as a semantic "catch-all" without distinct keyword patterns, leading to 18% confusion with *Lecturer* and 20% with *Curriculum*.
 * **Overfitting Tendency:** Learning curves indicate validation loss diverging from training loss from Epoch 6 onwards, highlighting a gap in generalization. Early stopping was successfully triggered at Epoch 13 to mitigate this.
 * **Vocabulary Limitations:** FastText embeddings only covered ~49% (1008/2069) of the vocabulary. Student-specific slang and abbreviations (e.g., *gv*, *sv*, *ko*) lacked pre-trained representations, resulting in a loss of valuable information.
 
-## 🚀 Future Improvements
+## Future Improvements
 * Replace Bi-LSTM with **PhoBERT** to capture deeper contextual relationships in Vietnamese text.
-* Implement Data Augmentation (e.g., Back-translation, Paraphrasing) specifically for *Neutral* and *Others* classes[cite: 6].
+* Implement Data Augmentation (e.g., Back-translation, Paraphrasing) specifically for *Neutral* and *Others* classes.
 
----
-**Team Members:** Trần Nhật Quang, Đinh Tiến Thành, Nguyễn Khánh Huyền, Võ Hữu Đức Chiến[cite: 6]
